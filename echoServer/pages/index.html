@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Echo Client</title>
+		<script src="socket.io/socket.io.js"></script>
+		<script type="text/javascript">
+			var socket = io();
+			socket.on('echo',function(data){
+				console.log('server -->'+data);
+				var responseContainer = document.getElementById("response");
+				responseContainer.innerHTML = data;
+			})
+			
+			function enviar(){
+				var str = document.getElementById("datain").value;
+				socket.emit('echo',str);
+			}
+		</script>
+	</head>
+	<body>
+		<!-- Body of document -->
+		<ul>
+			<li><a href="https://socket.io/">Socket IO Home Page</a></li>
+			<li><a href="https://expressjs.com/">Express JS Home Page</a></li>
+			<li><a href="https://www.netguru.co/codestories/socket.io-easy-way-to-handle-websockets">Socket.io a easy way to handle sockets</a>
+		</ul>
+		
+		<div>
+			<p>Inserta un mensaje para enviar:</p>
+			<label for="datain"></label><input type="text" id="datain"/>
+			<button type="button" onclick="enviar()">Enviar</button>
+		</div>
+		<div>
+			<p>Server Response:</p>
+			<p id="response"></p> 
+		</div>
+	</body>
+</html>
